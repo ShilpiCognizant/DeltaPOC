@@ -22,6 +22,7 @@ class APIClient: NSObject {
     method: .get)
     .validate()
     .responseJSON { response in
+    
     guard response.result.isSuccess else {
     print("Error while fetching remote rooms")
     completion(nil)
@@ -34,6 +35,18 @@ class APIClient: NSObject {
     completion(nil)
     return
     }
+    
+//        do{
+//        let decoder = JSONDecoder()
+//            let model = try decoder.decode(CountryDetails.self, from: response.result.value as! Data)
+//       // let model = try decoder.decode([User].self, from:
+//       //     dataResponse) //Decode JSON Response Data
+//        print(model)
+//    } catch let parsingError {
+//        print("Error", parsingError)
+//    }
+
+        
         completion(rows)
         return
   }

@@ -31,7 +31,7 @@ class ViewModel: NSObject {
         return rowData?["country"] as? String ?? ""
     }
     
-    func cellForRowImage(index: IndexPath) -> String {
+    func cellRowImage(index: IndexPath) -> String {
         let rowImage = self.arrCountryDetails?[index.row] as? [String : Any]
         return rowImage?["flag"] as? String ?? ""
     }

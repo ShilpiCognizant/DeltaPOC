@@ -14,10 +14,24 @@ class ViewController: UIViewController {
     @IBOutlet var viewModal : ViewModel!
     @IBOutlet var tableView : UITableView!
     var cellIdentifier = "cell"
+    private let refreshControl = UIRefreshControl()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        // Add Refresh Control to Table View
+        if #available(iOS 10.0, *) {
+            self.tableView.refreshControl = refreshControl
+        } else {
+            self.tableView.addSubview(refreshControl)
+        }
+        
+        //Add target to refresh table
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+
+
         //Register Cell Identifier
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
@@ -26,6 +40,19 @@ class ViewController: UIViewController {
             // GCD
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+            }
+        }
+    }
+    
+    //Refresh TableView
+    @objc private func refreshData(_ sender: Any) {
+
+        // Call API
+        self.viewModal.fetchData  {
+            // GCD
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.refreshControl.endRefreshing()
             }
         }
     }
@@ -40,7 +67,7 @@ class ViewController: UIViewController {
             cell.textLabel?.text = viewModal.cellForRowData(index: indexPath)
             
             //Set Image using kingfisher
-            let url = URL(string: viewModal.cellForRowImage(index: indexPath))
+            let url = URL(string: viewModal.cellRowImage(index: indexPath))
             cell.imageView?.kf.setImage(with:url)
             
             return cell
@@ -57,4 +84,7 @@ class ViewController: UIViewController {
         }
  }
 
-
+// TableView Extension
+extension ViewController {
+    
+}

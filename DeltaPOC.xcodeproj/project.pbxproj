@@ -19,6 +19,8 @@
 		BA0951C622809AB300B53998 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0951C422809AB300B53998 /* ViewModel.swift */; };
 		BA0951C822809ADD00B53998 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0951C722809ADD00B53998 /* APIClient.swift */; };
 		BA0951C922809ADD00B53998 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0951C722809ADD00B53998 /* APIClient.swift */; };
+		BA0951CB2280B78C00B53998 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0951CA2280B78C00B53998 /* Model.swift */; };
+		BA0951CC2280B78C00B53998 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA0951CA2280B78C00B53998 /* Model.swift */; };
 		C16E7881A833ED561B133594 /* Pods_DeltaPOCTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD586A8E887D9A8B250050E3 /* Pods_DeltaPOCTests.framework */; };
 		F99EFB96AFB200FA9B650A9D /* Pods_DeltaPOC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 911CBB913D967D4EEFC82A6C /* Pods_DeltaPOC.framework */; };
 /* End PBXBuildFile section */
@@ -62,6 +64,7 @@
 		BA0951B522808D5400B53998 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA0951C422809AB300B53998 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		BA0951C722809ADD00B53998 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		BA0951CA2280B78C00B53998 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D2D745F1698D39B5F9F3240F /* Pods_DeltaPOCUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaPOCUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAE8E2359EF4461790CC5837 /* Pods-DeltaPOC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DeltaPOC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DeltaPOC/Pods-DeltaPOC.debug.xcconfig"; sourceTree = "<group>"; };
 		FD586A8E887D9A8B250050E3 /* Pods_DeltaPOCTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DeltaPOCTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -164,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				BA0951C422809AB300B53998 /* ViewModel.swift */,
+				BA0951CA2280B78C00B53998 /* Model.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -425,6 +429,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BA0951CB2280B78C00B53998 /* Model.swift in Sources */,
 				BA09519622808D4800B53998 /* ViewController.swift in Sources */,
 				BA0951C522809AB300B53998 /* ViewModel.swift in Sources */,
 				BA09519422808D4800B53998 /* AppDelegate.swift in Sources */,
@@ -439,6 +444,7 @@
 				BA0951C622809AB300B53998 /* ViewModel.swift in Sources */,
 				BA0951A922808D5400B53998 /* DeltaPOCTests.swift in Sources */,
 				BA0951C922809ADD00B53998 /* APIClient.swift in Sources */,
+				BA0951CC2280B78C00B53998 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
