@@ -11,45 +11,41 @@ import Alamofire
 
 class APIClient: NSObject {
 
-    func fetchAPI(completion : @escaping (Any?) -> ())
+    func fetchTestAPIData(completion : @escaping (Result<CountryDetails>) -> Void)
 {
-    guard let url = URL(string:"https://my-json-server.typicode.com/iosdevtest19/devtest2/db")
-    else {
-    completion(nil)
-    return
-    }
-    Alamofire.request(url,
-    method: .get)
-    .validate()
-    .responseJSON { response in
-    
-    guard response.result.isSuccess else {
-    print("Error while fetching remote rooms")
-    completion(nil)
-    return
-    }
-    
-    guard let value = response.result.value as? [String: Any],
-        let rows = value["worldpopulation"] as Any?
-    else {
-    completion(nil)
-    return
-    }
-    
-//        do{
-//        let decoder = JSONDecoder()
-//            let model = try decoder.decode(CountryDetails.self, from: response.result.value as! Data)
-//       // let model = try decoder.decode([User].self, from:
-//       //     dataResponse) //Decode JSON Response Data
-//        print(model)
-//    } catch let parsingError {
-//        print("Error", parsingError)
-//    }
-
-        
-        completion(rows)
-        return
+        guard let URL = URL(string: "https://my-json-server.typicode.com/iosdevtest19/devtest2/db") else {
+            let error = NSError(domain: "Error", code: 400, userInfo: nil)
+            return completion(.failure(error))
+        }
+        //Alamofire request to get data
+        let request = Alamofire.request(URL,
+                                        method: Alamofire.HTTPMethod.get,
+                                        parameters: nil,
+                                        encoding: JSONEncoding.default,
+                                        headers: nil)
+        //Response from the request
+        request.responseData(completionHandler: {(response) in
+            switch response.result {
+            case .success:
+                if let responseData = response.result.value {
+                    let responseString = String(data: responseData, encoding: String.Encoding.isoLatin1)
+                    guard let resultValue = responseString?.data(using: String.Encoding.utf8) else {
+                        let error = NSError(domain: "Error", code: 400, userInfo: nil)
+                        return completion(.failure(error))
+                    }
+                    do {//Codable code to decode the data
+                        let jsonDecoder = JSONDecoder()
+                        var decoded = CountryDetails()
+                        decoded = try jsonDecoder.decode(CountryDetails.self, from: resultValue)
+                        completion(.success(decoded))
+                    } catch let error as NSError {
+                     
+                        completion(.failure(error))
+                    }
+                }
+            case .failure(let error as NSError):
+                completion(.failure(error))
+            }
+        })
   }
-    
- }
 }

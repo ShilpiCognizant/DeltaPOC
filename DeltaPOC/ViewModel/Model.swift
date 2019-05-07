@@ -8,10 +8,13 @@
 
 import UIKit
 
-struct CountryDetails: Codable{
-    var rank: Int
-    var countryName: String
-    var population: String
-    var flag: String
+struct CountryDetails: Decodable {
+    var worldpopulation: [CountryData]?
 }
 
+struct CountryData: Decodable {
+    var rank: Int?
+    var country: String?
+    var population: String?
+    var flag: String?
+}

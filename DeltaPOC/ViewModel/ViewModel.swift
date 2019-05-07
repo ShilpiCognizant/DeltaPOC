@@ -13,27 +13,54 @@ class ViewModel: NSObject {
     @IBOutlet var apiclient : APIClient?
     
     var arrCountryDetails : NSArray?
+    var modelCountry = CountryDetails()
     
     func fetchData(completion : @escaping () -> ()){
         
-        apiclient?.fetchAPI{ apidata in
-            self.arrCountryDetails = apidata as? NSArray
-            completion()
+        apiclient?.fetchTestAPIData{ resultValue in
+            
+            if resultValue.isSuccess {
+                guard let parsedData = resultValue.value else {
+                    return completion()
+                }
+                self.parseDataToModel(value: parsedData)
+                if self.modelCountry.worldpopulation != nil {
+                    completion()
+                } else {
+                    completion()
+                }
+            }
+        }
+    }
+    
+    // Storing data in model
+    func parseDataToModel(value: CountryDetails) {
+        ///Filter the data : remove nil values from dictionaries
+        if let worldpopulation = value.worldpopulation {
+            let filterData = worldpopulation.filter {($0.rank != nil) ||
+                ($0.country != nil) ||
+                ($0.population != nil) || ($0.flag != nil)}
+            modelCountry.worldpopulation = filterData
+        } else {
+            modelCountry.worldpopulation = nil
+            
         }
     }
     
     func numberOfRowsInSection(section : Int) -> Int {
-        return self.arrCountryDetails?.count ?? 0
+        return modelCountry.worldpopulation?.count ?? 0
     }
     
-    func cellForRowData(index: IndexPath) -> String {
-        let rowData = self.arrCountryDetails?[index.row] as? [String : Any]
-        return rowData?["country"] as? String ?? ""
+    func cellForRowData(indexPath: IndexPath) -> String {
+      
+        let rowData = modelCountry.worldpopulation?[indexPath.row]
+        return rowData?.country ?? ""
     }
     
-    func cellRowImage(index: IndexPath) -> String {
-        let rowImage = self.arrCountryDetails?[index.row] as? [String : Any]
-        return rowImage?["flag"] as? String ?? ""
+    func cellRowImage(indexPath: IndexPath) -> String {
+        let rowImage = modelCountry.worldpopulation?[indexPath.row]
+        return rowImage?.flag ?? ""
     }
     
 }
+

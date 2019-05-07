@@ -31,7 +31,6 @@ class ViewController: UIViewController {
         //Add target to refresh table
         refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
 
-
         //Register Cell Identifier
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellIdentifier)
         
@@ -64,10 +63,10 @@ class ViewController: UIViewController {
     
             let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as UITableViewCell
            //fetching data from viewmodel
-            cell.textLabel?.text = viewModal.cellForRowData(index: indexPath)
+            cell.textLabel?.text = viewModal.cellForRowData(indexPath: indexPath)
             
             //Set Image using kingfisher
-            let url = URL(string: viewModal.cellRowImage(index: indexPath))
+            let url = URL(string: viewModal.cellRowImage(indexPath: indexPath))
             cell.imageView?.kf.setImage(with:url)
             
             return cell
